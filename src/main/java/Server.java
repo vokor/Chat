@@ -9,8 +9,6 @@ public class Server extends GreeterGrpc.GreeterImplBase {
 
     @Override
     public void sayHello(Chat.HelloRequest req, StreamObserver<Chat.HelloReply> responseObserver) {
-        Chat.HelloReply reply = Chat.HelloReply.newBuilder().setMessage("Hello " + req.getName()).build();
-        responseObserver.onNext(reply);
-        responseObserver.onCompleted();
+        Chat.HelloReply reply = Chat.HelloReply.newBuilder().setMessage("User: " + req.getName() + " connected").build();
     }
 }
