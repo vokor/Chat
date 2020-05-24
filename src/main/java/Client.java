@@ -1,11 +1,16 @@
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Client {
 
     private final String address;
     private final int port;
     private final String name;
+
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public Client(String address, int port, String name) {
         this.address = address;
@@ -23,9 +28,17 @@ public class Client {
 
     public void connect() {
         RouteGuideClient(ManagedChannelBuilder.forAddress(address, port).usePlaintext());
-        asyncStub.sayHello(Chat.HelloRequest.newBuilder().setName(name).build(), new StreamObserver<>() {
+    }
+
+    public void send(String text) {
+        asyncStub.sayHello(Chat.HelloRequest.newBuilder()
+                .setName(name)
+                .setTime(formatter.format(new Date()))
+                .setText(text)
+                .build(), new StreamObserver<>() {
             @Override
             public void onNext(Chat.HelloReply value) {
+                System.out.println(value);
             }
 
             @Override
@@ -38,8 +51,5 @@ public class Client {
 
             }
         });
-    }
-
-    public void send(String text) {
     }
 }
