@@ -11,8 +11,8 @@ public class Greeter extends GreeterGrpc.GreeterImplBase {
     }
 
     @Override
-    public void sayHello(Chat.HelloRequest req, StreamObserver<Chat.HelloReply> responseObserver) {
-        Chat.HelloReply reply = Chat.HelloReply
+    public void say(Chat.Request req, StreamObserver<Chat.Reply> responseObserver) {
+        Chat.Reply reply = Chat.Reply
                 .newBuilder()
                 .setMessage(pack(req.getName(), req.getTime(), req.getText()))
                 .build();

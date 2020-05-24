@@ -31,13 +31,13 @@ public class Client {
     }
 
     public void send(String text) {
-        asyncStub.sayHello(Chat.HelloRequest.newBuilder()
+        asyncStub.say(Chat.Request.newBuilder()
                 .setName(name)
                 .setTime(formatter.format(new Date()))
                 .setText(text)
                 .build(), new StreamObserver<>() {
             @Override
-            public void onNext(Chat.HelloReply value) {
+            public void onNext(Chat.Reply value) {
                 System.out.println(value);
             }
 

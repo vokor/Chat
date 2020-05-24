@@ -1,10 +1,23 @@
-import io.grpc.Grpc;
-import io.grpc.ManagedChannel;
-import io.grpc.inprocess.InProcessChannelBuilder;
-import io.grpc.inprocess.InProcessServerBuilder;
-import io.grpc.stub.StreamObserver;
-import com.google.protobuf.MessageLite;
+import io.grpc.ServerBuilder;
 
-public class Server {
+import java.io.IOException;
+import java.util.logging.Level;
 
+public class Server extends Thread {
+
+    io.grpc.Server server;
+
+    public Server(int port) {
+        this.server = ServerBuilder.forPort(port).addService(new Greeter()).build();
+    }
+
+    @Override
+    public void run() {
+        try {
+            server.start();
+            server.awaitTermination();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
