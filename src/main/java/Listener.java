@@ -1,30 +1,32 @@
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.Level;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Listener {
     Client client;
-    private volatile boolean work;
     private final String exit = "exit";
+    AtomicBoolean work;
 
     public Listener(Client client) {
         this.client = client;
+        work = new AtomicBoolean(false);
     }
 
     public void run() {
         client.connect();
-        work = true;
-
+        work.set(true);
         Thread thread = new Thread(() -> {
-            while (work) {
+            while (work.get()) {
                 Scanner in = new Scanner(System.in);
                 String text = in.next();
-                if (text.equals(exit))
-                    return;
                 client.send(text);
+                if (text.equals(exit))
+                    work.set(false);
             }
         });
         thread.start();
 
+        while (work.get()) {
+            client.get();
+        }
     }
 }

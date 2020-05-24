@@ -1,7 +1,6 @@
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 public class Server extends Thread {
 
@@ -15,8 +14,7 @@ public class Server extends Thread {
     public void run() {
         try {
             server.start();
-            server.awaitTermination();
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

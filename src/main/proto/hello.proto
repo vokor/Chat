@@ -5,7 +5,8 @@ option java_outer_classname = "Chat";
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
-  rpc Say (Request) returns (Reply) {}
+  rpc Send (Request) returns (Empty) {}
+  rpc Get (From) returns (Reply) {}
 }
 
 // The request message containing the user's name.
@@ -19,3 +20,9 @@ message Request {
 message Reply {
   string message = 1;
 }
+
+message From {
+  string name = 1;
+}
+
+message Empty {}
