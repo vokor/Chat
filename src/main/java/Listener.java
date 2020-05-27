@@ -17,7 +17,7 @@ public class Listener {
         Thread thread = new Thread(() -> {
             while (work.get()) {
                 Scanner in = new Scanner(System.in);
-                String text = in.next();
+                String text = in.nextLine();
                 client.send(text);
                 if (text.equals(exit))
                     work.set(false);
