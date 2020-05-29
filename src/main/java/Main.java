@@ -10,25 +10,30 @@ class Main {
         int port;
         String address = "127.0.0.1";
 
-        if (args.length == 2) {
-            name = args[0];
-            port = Integer.valueOf(args[1]);
-            System.out.println("If you want to run as Client enter your Address else 'No'");
-            Scanner in = new Scanner(System.in);
-            String text = in.nextLine();
-            if (text.equals("No")) {
+	System.out.println("Enter SRV or CLI");
+	Scanner in = new Scanner(System.in);
+        String text = in.nextLine();
+
+	System.out.println("Enter your name");
+	in = new Scanner(System.in);
+        name = in.nextLine();
+
+
+	System.out.println("Enter port");
+	in = new Scanner(System.in);
+        port = Integer.valueOf(in.nextLine());
+
+	if (text.equals("SRV")) {
                 server = new Server(port);
                 server.start();
                 logger.info("Server");
             } else {
-                address = text;
+                System.out.println("Enter server adress");
+		in = new Scanner(System.in);
+        	address = in.nextLine();
                 logger.info("Client");
             }
-        } else {
-            logger.info("Invalid number of arguments");
-            logger.info("Example: Igor 4000");
-            return;
-        }
+
         new Listener(new Client(address, port, name)).run();
     }
 }
