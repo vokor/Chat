@@ -20,8 +20,13 @@ Important: names must be unique
          docker build -t chat:demo .
          
 ### Run docker
+As server, -p4004:4004 open 4004 port and we can use it for our connection:
 
-         run docker chat:demo
+         docker run -it -p4004:4004 chat:demo
+         
+As client, connect to the open port and server address:
+
+         docker run -it chat:demo
 
 ### Requirements
 * 11-openjdk
