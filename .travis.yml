@@ -4,6 +4,7 @@ install: true
 os: linux
 dist: trusty
 
+jdk:
+  - openjdk-11-jdk
 script:
   - gradle build
-
