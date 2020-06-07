@@ -1,12 +1,17 @@
+package Chat.server;
+
 import io.grpc.stub.StreamObserver;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Implements the service Greeter and designs the package
+ */
 public class Greeter extends GreeterGrpc.GreeterImplBase {
 
-    String user;
-    int count;
+    private String user;
+    private int count;
     private final Object object;
     private final ConcurrentLinkedQueue<Chat.Reply> queue1;
     private final ConcurrentLinkedQueue<Chat.Reply> queue2;
@@ -21,14 +26,19 @@ public class Greeter extends GreeterGrpc.GreeterImplBase {
         work = new AtomicBoolean(true);
     }
 
-    String format(String time) {
+    private String format(String time) {
         return "[" + time + "]";
     }
 
-    String pack(String name, String time, String text) {
+    private String pack(String name, String time, String text) {
         return format(time) + " " + name + " -> " + text;
     }
 
+    /**
+     * Send message to client
+     * @param req - request with name
+     * @param responseObserver - stream empty
+     */
     @Override
     public void send(Chat.Request req, StreamObserver<Chat.Empty> responseObserver) {
         Chat.Reply reply = Chat.Reply
@@ -49,6 +59,11 @@ public class Greeter extends GreeterGrpc.GreeterImplBase {
             queue1.add(reply);
     }
 
+    /**
+     * Get message from client and push to the queue
+     * @param from - name client
+     * @param responseObserver - message reply
+     */
     @Override
     public void get(Chat.From from, StreamObserver<Chat.Reply> responseObserver) {
         checker(from.getName());

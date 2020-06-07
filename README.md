@@ -7,7 +7,6 @@ Important: names must be unique
 
 ### Build the project
 
-         gradle wrapper
          ./gradlew installDist
          
 ### Run the project

@@ -1,9 +1,17 @@
+package Chat;
+
+import Chat.listener.Listener;
+import Chat.server.Server;
+
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+/**
+ * Implementation of chat with gRPC framework
+ */
 class Main {
     public static void main(String[] args) {
-        Logger logger = Logger.getLogger("Main");
+        Logger logger = Logger.getLogger("Chat.Main");
         Server server;
         String name;
         int port;
@@ -25,12 +33,12 @@ class Main {
 	if (text.equals("SRV")) {
                 server = new Server(port);
                 server.start();
-                logger.info("Server");
+                logger.info("Chat.server.Server");
             } else {
                 System.out.println("Enter server adress");
                 in = new Scanner(System.in);
                 address = in.nextLine();
-                logger.info("Client");
+                logger.info("Chat.client.Client");
             }
 
         new Listener(new Client(address, port, name)).run();

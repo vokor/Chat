@@ -1,15 +1,22 @@
+package Chat.client;
+
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * A simple client that requests/sends a message, time and a username from the RPCChat.server.
+ */
 public class Client {
 
     private final String address;
     private final int port;
     private final String name;
     private final String exit = "exit";
+    private GreeterGrpc.GreeterStub asyncStub;
+    private GreeterGrpc.GreeterBlockingStub blockingStub;
 
     private final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
@@ -19,10 +26,7 @@ public class Client {
         this.name = name;
     }
 
-    GreeterGrpc.GreeterStub asyncStub;
-    GreeterGrpc.GreeterBlockingStub blockingStub;
-
-    /** Construct client for accessing Greeter server using the existing channel. */
+    /** Construct client for accessing Chat.server.Greeter server using the existing channel. */
     public void RouteGuideClient(ManagedChannelBuilder<?> channelBuilder) {
         var channel = channelBuilder.build();
         asyncStub = GreeterGrpc.newStub(channel);
