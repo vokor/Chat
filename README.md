@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/vokor/Chat.svg?branch=master)](https://github.com/vokor/Chat)
 # Chat gRPC
 
 ## About
