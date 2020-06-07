@@ -1,5 +1,3 @@
-package Chat.client;
-
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
@@ -26,7 +24,7 @@ public class Client {
         this.name = name;
     }
 
-    /** Construct client for accessing Chat.server.Greeter server using the existing channel. */
+    /** Construct client for accessing Greeter server using the existing channel. */
     public void RouteGuideClient(ManagedChannelBuilder<?> channelBuilder) {
         var channel = channelBuilder.build();
         asyncStub = GreeterGrpc.newStub(channel);

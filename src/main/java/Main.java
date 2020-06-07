@@ -1,8 +1,3 @@
-package Chat;
-
-import Chat.listener.Listener;
-import Chat.server.Server;
-
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -11,7 +6,7 @@ import java.util.logging.Logger;
  */
 class Main {
     public static void main(String[] args) {
-        Logger logger = Logger.getLogger("Chat.Main");
+        Logger logger = Logger.getLogger("Main");
         Server server;
         String name;
         int port;
@@ -33,12 +28,12 @@ class Main {
 	if (text.equals("SRV")) {
                 server = new Server(port);
                 server.start();
-                logger.info("Chat.server.Server");
+                logger.info("Server");
             } else {
                 System.out.println("Enter server adress");
                 in = new Scanner(System.in);
                 address = in.nextLine();
-                logger.info("Chat.client.Client");
+                logger.info("Client");
             }
 
         new Listener(new Client(address, port, name)).run();

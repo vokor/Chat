@@ -1,4 +1,3 @@
-package Chat.server;
 
 import io.grpc.stub.StreamObserver;
 

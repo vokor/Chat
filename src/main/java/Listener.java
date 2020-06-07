@@ -1,7 +1,3 @@
-package Chat.listener;
-
-import Chat.client.Client;
-
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
